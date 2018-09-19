@@ -1,4 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Item
 
 def get_todo_list(request):
-    return render(request, "todo_list.html")
+    results = Item.objects.all()
+    return render(request, "todo_list.html", {'items': results})
+
+def create_an_item(request):
+    if request.method=="POST":
+        new_item = Item()
+        new_item.name = request.POST.get('name')
+        new_item.done = 'done' in request.POST
+        new_item.save()
+        return redirect(get_todo_list)
+    return render(request, "item_form.html")
