@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.get_todo_list),
     path('add', views.create_an_item),
-    path('edit/<id>', views.edit_an_item)
+    path('edit/<id>', views.edit_an_item),
+    path('toggle/<id>', views.toggle_status)
 ]
